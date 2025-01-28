@@ -1,0 +1,122 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>College Registration Form</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f4f4f4;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            margin: 0;  
+        }  
+        form {  
+            background: white;  
+            padding: 5%;  
+            border-radius: 8px;  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+             
+        }  
+        form h2 {  
+            text-align: center;  
+        }  
+        form div {  
+            margin-bottom: 15px;  
+        }  
+        form label {  
+            display: block;  
+            margin-bottom: 5px;  
+        }  
+        form input, form select {  
+            width: 100%;  
+            padding: 8px;  
+            border: 1px solid #ccc;  
+            border-radius: 5px;  
+        }  
+        form button {  
+            background-color: #28a745;  
+            color: white;  
+            border: none;  
+            padding: 10px;  
+            border-radius: 5px;  
+            cursor: pointer;  
+            width: 100%;  
+        }  
+        form button:hover {  
+            background-color: #218838;  
+        }  
+    </style>  
+</head>  
+<body>  
+
+    <form action="/submit_registration" onsubmit="return validateForm()" method="post">  
+        <h2>Registration Form</h2>  
+        
+        <div>  
+            <label for="firstName">First Name:</label>  
+            <input type="text" id="firstName" name="firstName" required>  
+        </div>  
+        
+        <div>  
+            <label for="lastName">Last Name:</label>  
+            <input type="text" id="lastName" name="lastName" required>  
+        </div>  
+
+        <div>  
+            <label for="email">Email:</label>  
+            <input type="email" id="email" name="email">  
+        </div>  
+        
+        <div>  
+            <label for="phone">Phone Number:</label>  
+            <input type="tel" id="phone" name="phone" >  
+        </div>  
+        
+        <div>  
+            <label for="dob">Date of Birth:</label>  
+            <input type="date" id="dob" name="dob" >  
+        </div>  
+        
+        <div>  
+            <label for="course">Select Course:</label>  
+            <select id="course" name="course" >  
+                <option value="">--Select a Course--</option>  
+                <option value="computer-science">Computer Science</option>  
+                <option value="business-administration">Business Administration</option>  
+                <option value="mechanical-engineering">Mechanical Engineering</option>  
+                <option value="electrical-engineering">Electrical Engineering</option>  
+            </select>  
+        </div>  
+
+        <div>  
+            <label for="gender">Gender:</label>  
+            <select id="gender" name="gender" >  
+                <option value="">--Select Gender--</option>  
+                <option value="male">Male</option>  
+                <option value="female">Female</option>  
+                <option value="other">Other</option>  
+            </select>  
+        </div>  
+
+        <button type="submit">Register</button>  
+    </form>  
+    <script>
+        function validateForm(){
+            let firstName = document.getElementById("firstName").value;
+            let lastName = document.getElementById("lastName").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+            let dob = document.getElementById("dob").value;
+            let course = document.getElementById("course").value;
+            if(firstName == "" || lastName == "" || email == "" || phone == "" || dob == "" || course == ""){
+                alert("All fields must be filled");
+                return false;
+            }
+            }
+    </script>
+</body>  
+</html>
