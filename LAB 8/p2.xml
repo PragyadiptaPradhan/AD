@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CourierCompany>
+    <Shipment id="001">
+        <TrackingID>TRACK123456</TrackingID>
+        <Sender>
+            <Name>ahgahi</Name>
+            <Address>
+                <Street>123 Elm Street</Street>
+                <City>Somewhere</City>
+                <State>StateX</State>
+                <ZipCode>12345</ZipCode>
+                <Country>CountryY</Country>
+            </Address>
+        </Sender>
+        <Receiver>
+            <Name>ahgiha</Name>
+            <Address>
+                <Street>456 Oak Avenue</Street>
+                <City>Elsewhere</City>
+                <State>StateZ</State>
+                <ZipCode>67890</ZipCode>
+                <Country>CountryY</Country>
+            </Address>
+        </Receiver>
+        <PackageDetails>
+            <Weight>2.5</Weight>
+            <Dimensions>
+                <Length>30</Length>
+                <Width>20</Width>
+                <Height>15</Height>
+            </Dimensions>
+            <Contents>Books</Contents>
+        </PackageDetails>
+        <ShippingCost currency="USD">15.00</ShippingCost>
+        <Status>In Transit</Status>
+    </Shipment>
+</CourierCompany>

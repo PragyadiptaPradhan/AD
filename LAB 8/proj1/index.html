@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XML Book Data Viewer</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #009879;
+            color: white;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+        tr:hover {
+            background-color: #e8f4ff;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #009879;">Book Catalog</h1>
+        <div id="tableContainer"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('books.xml')
+                .then(response => response.text())
+                .then(xmlString => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+                    buildTable(xmlDoc);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('tableContainer').innerHTML = 
+                        '<p style="color: red">Error loading book data. Please check the XML file.</p>';
+                });
+
+            function buildTable(xmlDoc) {
+                let html = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Authors</th>
+                                <th>Category</th>
+                                <th>Year</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                const books = xmlDoc.getElementsByTagName('book');
+                Array.from(books).forEach(book => {
+                    const category = book.getAttribute('category');
+                    const title = book.getElementsByTagName('title')[0].textContent;
+                    const year = book.getElementsByTagName('year')[0].textContent;
+                    const price = parseFloat(book.getElementsByTagName('price')[0].textContent).toFixed(2);
+                    const authors = Array.from(book.getElementsByTagName('author'))
+                                      .map(author => author.textContent)
+                                      .join(', ');
+
+                    html += `
+                        <tr>
+                            <td>${title}</td>
+                            <td>${authors}</td>
+                            <td>${category}</td>
+                            <td>${year}</td>
+                            <td>$${price}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `</tbody></table>`;
+                document.getElementById('tableContainer').innerHTML = html;
+            }
+        });
+    </script>
+</body>
+</html>

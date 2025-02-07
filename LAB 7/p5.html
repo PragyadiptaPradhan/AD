@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+</head>
+<body>
+    <h1>Currency Converter From Rupees to Dollar</h1>
+    <textarea id="amount"></textarea>
+    <button id="convert">Convert</button>
+    <p id="result"></p>
+
+    <script>
+        document.querySelector('#convert').addEventListener('click', function() {
+            var text = document.querySelector('#amount').value;
+            var dollar = parseFloat(text) * (1 / 86.64);
+            document.querySelector('#result').textContent = 'The Amount in Dollars: ' + dollar.toFixed(2);
+        });
+    </script>
+</body>
+</html>

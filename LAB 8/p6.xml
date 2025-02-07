@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+    <xs:simpleType name="MMDDYYYYDate">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])-\d{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:element name="date" type="MMDDYYYYDate"/>
+    <Invoice>
+        <Number>INV-2024-001</Number>
+        <IssueDate type="date">01-15-2025</IssueDate>
+        <DueDate>01-15-2025</DueDate>
+    </Invoice>
+    <Invoice>
+    <Number>INV-2024-002</Number>
+    <IssueDate>02-28-2024</IssueDate>  <!-- Valid -->
+    <DueDate>02-29-2024</DueDate>      <!-- Format valid (regex passes), but invalid date -->
+    </Invoice>
+
+
+</xs:schema>

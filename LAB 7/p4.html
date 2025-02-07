@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Count</title>
+</head>
+<body>
+    <h1>Word Count</h1>
+    <textarea id="text"></textarea>
+    <button id="count">Count Words</button>
+    <p id="result"></p>
+
+    <script>document.getElementById('stop').addEventListener('click', () => {
+            if (running) {
+                running = false;
+                clearInterval(timer);
+            }
+        });
+        document.querySelector('#count').addEventListener('click', function() {
+            var text = document.querySelector('#text').value;
+            var words = text.split(' ').length;
+            document.querySelector('#result').textContent = 'Word Count: ' + words;
+        });
+    </script>
+    
+</body>
+</html>

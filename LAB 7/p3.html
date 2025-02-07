@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+
+</head>
+<body>
+    <h1>Stop Watch</h1>
+    <h2 id="display">00:00:00</h2>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+
+    <script>
+        let timer;
+        let elapsedTime = 0;
+        let running = false;
+
+        function updateDisplay() {
+            const hours = String(Math.floor(elapsedTime / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((elapsedTime % 3600) / 60)).padStart(2, '0');
+            const seconds = String(elapsedTime % 60).padStart(2, '0');
+            document.getElementById('display').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        document.getElementById('start').addEventListener('click', () => {
+            if (!running) {
+                running = true;
+                timer = setInterval(() => {
+                    elapsedTime++;
+                    updateDisplay();
+                }, 1000);
+            }
+        });
+
+        document.getElementById('stop').addEventListener('click', () => {
+            if (running) {
+                running = false;
+                clearInterval(timer);
+            }
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            running = false;
+            clearInterval(timer);
+            elapsedTime = 0;
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>

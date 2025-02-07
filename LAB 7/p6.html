@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+</head>
+<body>
+    <h1>Password Strength Checker</h1>
+    <input type="password" id="password">
+    <button id="check">Check Strength</button>
+    <p id="result"></p>
+    <script>
+        document.querySelector('#check').addEventListener('click', function() {
+            var password = document.querySelector('#password').value;
+            var strength = 0;
+            if(password.match(/[a-z]+/)) {
+                strength += 1;
+            }
+            if(password.match(/[A-Z]+/)) {
+                strength += 1;
+            }
+            if(password.match(/[0-9]+/)) {
+                strength += 1;
+            }
+            if(password.match(/[$@#&!]+/)) {
+                strength += 1;
+            }
+            if(password.length >= 8) {
+                strength += 1;
+            }
+            var result = '';
+            switch(strength) {
+                case 0:
+                    result = 'Very Weak';
+                    break;
+                case 1:
+                    result = 'Weak';
+                    break;
+                case 2:
+                    result = 'Medium';
+                    break;
+                case 3:
+                    result = 'Strong';
+                    break;
+                case 4:
+                    result = 'Very Strong';
+                    break;
+                case 5:
+                    result = 'Extremely Strong';
+                    break;
+            }
+            document.querySelector('#result').textContent = 'Password Strength: ' + result;
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+  <book category="Science">
+    <title lang="en">Applied Physics</title>
+    <author>Hrisi Pradhan</author>
+    <year>2005</year>
+    <price>30.00</price>
+  </book>
+  <book category="Engg">
+    <title lang="en">CC</title>
+    <author>ASHISH SINGH</author>
+    <year>2005</year>
+    <price>29.99</price>
+  </book>
+  <book category="Children">
+    <title lang="en">ABC</title>
+    <author>Asharam Bapu</author>
+    <year>2003</year>
+    <price>49.99</price>
+  </book>
+  <book category="Fiction" cover="paperback">
+    <title lang="en">Harry potter</title>
+    <author>JK Rowling</author>
+    <year>2003</year>
+    <price>39.95</price>
+  </book>
+  <book category="Commerce">
+    <title lang="en">Marketing Management</title>
+    <author>James McGovern</author>
+    <author>Per Bothner</author>
+    <author>Kurt Cagle</author>
+    <author>James Linn</author>
+    <author>Vaidyanathan Nagarajan</author>
+    <year>2003</year>
+    <price>49.99</price>
+  </book>
+</bookstore>

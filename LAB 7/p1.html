@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+</head>
+<body>
+    <h1>Basic Calculator</h1>
+    <form action="p1.php" method="post">
+        <input type="number" name="num1" placeholder="Enter first number">
+        <input type="number" name="num2" placeholder="Enter second number">
+        <select name="operator">
+            <option value="add">Add</option>
+            <option value="sub">Subtract</option>
+            <option value="mul">Multiply</option>
+            <option value="div">Divide</option>
+        </select>
+        <button type="submit" name="submit">Calculate</button>
+        <script>
+            document.querySelector('button').addEventListener('click', function() {
+                var num1 = document.querySelector('input[name="num1"]').value;
+                var num2 = document.querySelector('input[name="num2"]').value;
+                var operator = document.querySelector('select').value;
+                var result = 0;
+                if (operator == 'add') {
+                    result = parseInt(num1) + parseInt(num2);
+                } else if (operator == 'sub') {
+                    result = parseInt(num1) - parseInt(num2);
+                } else if (operator == 'mul') {
+                    result = parseInt(num1) * parseInt(num2);
+                } else if (operator == 'div') {
+                    result = parseInt(num1) / parseInt(num2);
+                }
+                alert('Result: ' + result);
+            });
+        </script>
+</body>
+</html>
