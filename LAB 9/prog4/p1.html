@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore XML Viewer</title>
+    <!-- <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #009879;
+            color: white;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+        tr:hover {
+            background-color: #e8f4ff;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style> -->
+</head>
+<body>
+
+    <h2>Bookstore Inventory</h2>
+    <table id="booksTable">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Author(s)</th>
+                <th>Year</th>
+                <th>Price ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const xmlData = `
+            <bookstore>
+                <book category="Science">
+                    <title lang="en">Applied Physics</title>
+                    <author>Hrisi Pradhan</author>
+                    <year>2005</year>
+                    <price>30.00</price>
+                </book>
+                <book category="Engg">
+                    <title lang="en">CC</title>
+                    <author>ASHISH SINGH</author>
+                    <year>2005</year>
+                    <price>29.99</price>
+                </book>
+                <book category="Children">
+                    <title lang="en">ABC</title>
+                    <author>Asharam Bapu</author>
+                    <year>2003</year>
+                    <price>49.99</price>
+                </book>
+                <book category="Fiction" cover="paperback">
+                    <title lang="en">Harry Potter</title>
+                    <author>JK Rowling</author>
+                    <year>2003</year>
+                    <price>39.95</price>
+                </book>
+                <book category="Commerce">
+                    <title lang="en">Marketing Management</title>
+                    <author>James McGovern</author>
+                    <author>Per Bothner</author>
+                    <author>Kurt Cagle</author>
+                    <author>James Linn</author>
+                    <author>Vaidyanathan Nagarajan</author>
+                    <year>2003</year>
+                    <price>49.99</price>
+                </book>
+            </bookstore>`;
+
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlData, "text/xml");
+
+            const books = xmlDoc.getElementsByTagName("book");
+
+            const tableBody = document.querySelector("#booksTable tbody");
+
+            if (books.length === 0) {
+                console.error("No books found in XML");
+                return;
+            }
+
+            for (let i = 0; i < books.length; i++) {
+                let book = books[i];
+
+                let category = book.getAttribute("category");
+                let title = book.getElementsByTagName("title")[0].textContent;
+                let authors = book.getElementsByTagName("author");
+                let year = book.getElementsByTagName("year")[0].textContent;
+                let price = book.getElementsByTagName("price")[0].textContent;
+
+                let authorsList = [];
+                for (let j = 0; j < authors.length; j++) {
+                    authorsList.push(authors[j].textContent);
+                }
+                let authorsText = authorsList.join(", ");
+
+                let row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${category}</td>
+                    <td>${title}</td>
+                    <td>${authorsText}</td>
+                    <td>${year}</td>
+                    <td>${price}</td>
+                `;
+
+                tableBody.appendChild(row);
+            }
+        });
+    </script>
+
+</body>
+</html>
