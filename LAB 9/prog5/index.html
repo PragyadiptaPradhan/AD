@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Employee Data Viewer</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #009879;
+            color: white;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+        tr:hover {
+            background-color: #e8f4ff;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #009879;">Company Employee Data</h1>
+        <div id="tableContainer"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('p3.xml')
+                .then(response => response.text())
+                .then(xmlString => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+                    buildTable(xmlDoc);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('tableContainer').innerHTML = 
+                        '<p style="color: red">Error loading employee data. Please check the XML file.</p>';
+                });
+
+            function buildTable(xmlDoc) {
+                let html = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                const departments = xmlDoc.getElementsByTagName('department');
+                Array.from(departments).forEach(department => {
+                    const departmentName = department.getAttribute('name');
+                    const employees = department.getElementsByTagName('employee');
+                    Array.from(employees).forEach(employee => {
+                        const id = employee.getAttribute('id');
+                        const name = employee.getElementsByTagName('name')[0].textContent;
+                        const position = employee.getElementsByTagName('position')[0].textContent;
+                        const email = employee.getElementsByTagName('email')[0].textContent;
+
+                        html += `
+                            <tr>
+                                <td>${departmentName}</td>
+                                <td>${id}</td>
+                                <td>${name}</td>
+                                <td>${position}</td>
+                                <td>${email}</td>
+                            </tr>
+                        `;
+                    });
+                });
+
+                html += `</tbody></table>`;
+                document.getElementById('tableContainer').innerHTML = html;
+            }
+        });
+    </script>
+</body>
+</html>

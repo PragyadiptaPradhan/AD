@@ -1,0 +1,19 @@
+<company>
+    <department name="HR">
+        <employee id="E001">
+            <name>John Doe</name>
+            <position>HR Manager</position>
+            <email>john.doe@company.com</email>
+        </employee>
+        <employee id="E002">
+            <name>Jane Smith</name>
+            <position>Sales</position>
+            <email>jane.smith@company.com</email>
+        </employee>
+        <employee id="E003">
+            <name>Samuel Lee</name>
+            <position>Sofware Developer</position>
+            <email>samuel.lee@company.com</email>
+        </employee>
+    </department>
+</company>
